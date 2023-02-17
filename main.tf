@@ -8,7 +8,7 @@ data "aws_iam_policy_document" "default" {
   }
 
   dynamic "statement" {
-    for_each = var.add_all_bucket_perms && name == "zapier" ? [1] : []
+    for_each = var.add_all_bucket_perms && var.name == "zapier" ? [1] : []
 
     content {
       sid = "AllBucketPermissions"
