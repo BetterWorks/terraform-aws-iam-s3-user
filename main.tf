@@ -6,7 +6,22 @@ data "aws_iam_policy_document" "default" {
     resources = var.s3_resources
     effect    = "Allow"
   }
+
+  dynamic "statement" {
+    for_each = (var.name == "zapier") ? [1] : []
+
+    content {
+      sid = "AllBucketPermissions"
+      actions   = [
+                    "s3:ListAllMyBuckets",
+                    "s3:GetBucketLocation"
+                  ]
+      resources = ["arn:aws:s3:::*"]
+      effect    = "Allow"
+    }
+  }
 }
+
 
 module "s3_user" {
   source        = "git::https://github.com/betterworks/terraform-aws-iam-system-user.git?ref=tags/0.5.0"
