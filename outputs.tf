@@ -21,5 +21,6 @@ output "access_key_id" {
 output "secret_access_key" {
   value       = module.s3_user.secret_access_key
   description = "The secret access key. This will be written to the state file in plain-text"
+  sensitive   = true
 }
 
