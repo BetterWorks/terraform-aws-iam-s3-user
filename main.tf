@@ -1,3 +1,10 @@
+terraform {
+  required_version = ">= 1.0"
+  required_providers {
+    aws  = "~> 5.0"
+  }
+}
+
 data "aws_iam_policy_document" "default" {
   count = var.enabled == "true" ? 1 : 0
 
@@ -24,7 +31,7 @@ data "aws_iam_policy_document" "default" {
 
 
 module "s3_user" {
-  source        = "git::https://github.com/betterworks/terraform-aws-iam-system-user.git?ref=tags/0.6.0"
+  source        = "git::https://github.com/betterworks/terraform-aws-iam-system-user.git?ref=v0.7.0"
   namespace     = var.namespace
   stage         = var.stage
   name          = var.name
